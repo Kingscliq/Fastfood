@@ -1,0 +1,12 @@
+/Users/crowdforce/fastfood/FastFood.Contracts/bin/Debug/net7.0/FastFood.Contracts.deps.json
+/Users/crowdforce/fastfood/FastFood.Contracts/bin/Debug/net7.0/FastFood.Contracts.dll
+/Users/crowdforce/fastfood/FastFood.Contracts/bin/Debug/net7.0/FastFood.Contracts.pdb
+/Users/crowdforce/fastfood/FastFood.Contracts/obj/Debug/net7.0/FastFood.Contracts.csproj.AssemblyReference.cache
+/Users/crowdforce/fastfood/FastFood.Contracts/obj/Debug/net7.0/FastFood.Contracts.GeneratedMSBuildEditorConfig.editorconfig
+/Users/crowdforce/fastfood/FastFood.Contracts/obj/Debug/net7.0/FastFood.Contracts.AssemblyInfoInputs.cache
+/Users/crowdforce/fastfood/FastFood.Contracts/obj/Debug/net7.0/FastFood.Contracts.AssemblyInfo.cs
+/Users/crowdforce/fastfood/FastFood.Contracts/obj/Debug/net7.0/FastFood.Contracts.csproj.CoreCompileInputs.cache
+/Users/crowdforce/fastfood/FastFood.Contracts/obj/Debug/net7.0/FastFood.Contracts.dll
+/Users/crowdforce/fastfood/FastFood.Contracts/obj/Debug/net7.0/refint/FastFood.Contracts.dll
+/Users/crowdforce/fastfood/FastFood.Contracts/obj/Debug/net7.0/FastFood.Contracts.pdb
+/Users/crowdforce/fastfood/FastFood.Contracts/obj/Debug/net7.0/ref/FastFood.Contracts.dll

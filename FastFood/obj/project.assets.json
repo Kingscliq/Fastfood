@@ -107,6 +107,16 @@
         "frameworkReferences": [
           "Microsoft.AspNetCore.App"
         ]
+      },
+      "FastFood.Contracts/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "compile": {
+          "bin/placeholder/FastFood.Contracts.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/FastFood.Contracts.dll": {}
+        }
       }
     }
   },
@@ -451,10 +461,16 @@
         "swashbuckle.aspnetcore.swaggerui.6.4.0.nupkg.sha512",
         "swashbuckle.aspnetcore.swaggerui.nuspec"
       ]
+    },
+    "FastFood.Contracts/1.0.0": {
+      "type": "project",
+      "path": "../FastFood.Contracts/FastFood.Contracts.csproj",
+      "msbuildProject": "../FastFood.Contracts/FastFood.Contracts.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net7.0": [
+      "FastFood.Contracts >= 1.0.0",
       "Microsoft.AspNetCore.OpenApi >= 7.0.3",
       "Swashbuckle.AspNetCore >= 6.4.0"
     ]
@@ -483,7 +499,11 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "/Users/crowdforce/fastfood/FastFood.Contracts/FastFood.Contracts.csproj": {
+              "projectPath": "/Users/crowdforce/fastfood/FastFood.Contracts/FastFood.Contracts.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
