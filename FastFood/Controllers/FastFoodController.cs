@@ -8,15 +8,17 @@ namespace FastFood.Controllers
     [Route("/fastfood")]
     public class FastFoodController : ControllerBase
     {
-
-        [HttpPost()]
+     [HttpPost()]
         public IActionResult CreateFastFood(CreateFastFoodRequest request){
             var fastfood = new FastFoodModel(Guid.NewGuid(), request.Name, request.Description, request.StartDate, request.EndDate, DateTime.UtcNow, request.Savory, request.Sweet);
 
             // TODO: Save Information to DB
 
             var response = new FastFoodResponse(fastfood.Id, fastfood.Name, fastfood.Description, fastfood.StartDate, fastfood.EndDate, fastfood.LastModifiedDateTime, fastfood.Savory, fastfood.Sweet);
-            return Ok(response);
+            return CreatedAtAction(
+                actionName: nameof(GetFastFood),
+                routeValues: new {id = response.Id},
+                value: response);
         }
 
         [HttpGet("{id:guid}")]
