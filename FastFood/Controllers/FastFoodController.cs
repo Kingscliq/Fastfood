@@ -27,7 +27,7 @@ namespace FastFood.Controllers
             return Ok(request);
         }
 
-        [HttpPut("/fastfood/{id:guid}")]
+        [HttpDelete("/fastfood/{id:guid}")]
         public IActionResult DeleteFastFood(Guid Id){
             return Ok(Id);
         }
