@@ -14,4 +14,9 @@ public class FastFoodService : IFastFoodService
     {
         return _fastfood[id];
     }
+
+    public void UpsertFastFood(FastFoodModel fastfood)
+    {
+        throw new NotImplementedException();
+    }
 }

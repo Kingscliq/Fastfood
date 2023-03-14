@@ -6,5 +6,6 @@ namespace FastFood.Services.FastFood
     {
         void CreateFastFood(FastFoodModel fastfood);
         FastFoodModel GetFastFood(Guid id);
+        void UpsertFastFood(FastFoodModel fastfood);
     }
 }

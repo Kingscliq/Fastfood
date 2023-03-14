@@ -59,7 +59,21 @@ namespace FastFood.Controllers
         [HttpPut("{id:guid}")]
         public IActionResult UpsertFastFood(Guid Id, UpsertFastFoodResquest request)
         {
-            return Ok(request);
+          var fastfood = new FastFoodModel(
+            Id,
+            request.Name,
+            request.Description,
+            request.EndDate,
+            request.StartDate,
+            request.EndDate,
+            request.Savory,
+            request.Sweet
+          );
+
+        _fastfoodService.UpsertFastFood(fastfood);
+
+        // TODO: Return 201 Created if the Item's ID doesnt exist on the DB 
+            return NoContent();
         }
 
         [HttpDelete("{id:guid}")]
