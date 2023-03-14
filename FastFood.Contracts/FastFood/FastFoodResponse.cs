@@ -10,6 +10,3 @@ public record FastFoodResponse(
     List<string> Savory,
     List<string> Sweet
 );
-
-
-
