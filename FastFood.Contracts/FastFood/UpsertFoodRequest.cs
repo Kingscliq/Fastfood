@@ -1,6 +1,6 @@
 namespace FastFood.Contracts.FastFood;
 
-public record CreateBreakFastRequest(
+public record UpsertFastFoodResquest(
     string Name,
     string Description,
     DateTime StartDate,
