@@ -33,7 +33,19 @@ namespace FastFood.Controllers
         [HttpGet("{id:guid}")]
         public IActionResult GetFastFood(Guid Id)
         {
-            return Ok(Id);
+            var fastfood = _fastfoodService.GetFastFood(Id);
+
+            var response = new FastFoodResponse(
+                fastfood.Id,
+                fastfood.Name,
+                fastfood.Description,
+                fastfood.StartDate,
+                fastfood.EndDate,
+                fastfood.LastModifiedDateTime,
+                fastfood.Savory,
+                fastfood.Sweet);
+
+            return Ok(response);
         }
 
         [HttpPut("{id:guid}")]
