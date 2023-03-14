@@ -19,7 +19,15 @@ namespace FastFood.Controllers
         [HttpPost]
         public IActionResult CreateFastFood(CreateFastFoodRequest request)
         {
-            var fastfood = new FastFoodModel(Guid.NewGuid(), request.Name, request.Description, request.StartDate, request.EndDate, DateTime.UtcNow, request.Savory, request.Sweet);
+            var fastfood = new FastFoodModel(
+                Guid.NewGuid(),
+                request.Name,
+                request.Description,
+                request.StartDate,
+                request.EndDate,
+                DateTime.UtcNow,
+                request.Savory,
+                request.Sweet);
 
             _fastfoodService.CreateFastFood(fastfood);
 

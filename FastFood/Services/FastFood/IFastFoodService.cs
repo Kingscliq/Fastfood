@@ -1,6 +1,5 @@
 
 using FastFood.Models;
-
 namespace FastFood.Services.FastFood
 {
     public interface IFastFoodService
