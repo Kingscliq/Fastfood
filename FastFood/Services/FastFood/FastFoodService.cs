@@ -17,6 +17,6 @@ public class FastFoodService : IFastFoodService
 
     public void UpsertFastFood(FastFoodModel fastfood)
     {
-        throw new NotImplementedException();
+       _fastfood.Add(fastfood.Id, fastfood);
     }
 }

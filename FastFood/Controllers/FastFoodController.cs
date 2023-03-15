@@ -65,7 +65,7 @@ namespace FastFood.Controllers
             request.Description,
             request.EndDate,
             request.StartDate,
-            request.EndDate,
+            DateTime.UtcNow,
             request.Savory,
             request.Sweet
           );
