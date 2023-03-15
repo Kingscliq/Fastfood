@@ -1,4 +1,6 @@
+using ErrorOr;
 using FastFood.Models;
+using FastFood.ServiceErrors;
 
 namespace FastFood.Services.FastFood;
 
@@ -15,9 +17,12 @@ public class FastFoodService : IFastFoodService
         _fastfood.Remove(id);
     }
 
-    public FastFoodModel GetFastFood(Guid id)
+    public ErrorOr<FastFoodModel> GetFastFood(Guid id)
     {
-        return _fastfood[id];
+        if(_fastfood.TryGetValue(id, out var fastFood)){
+             return fastFood;
+        }
+        return Errors.FastFood.NotFound;
     }
 
     public void UpsertFastFood(FastFoodModel fastfood)

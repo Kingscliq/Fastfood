@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "vMI5WaERy0ZBvLBSLzFcE68qGlre1E3JZ1aJRQGEJlhl+9NJL3EfRUOiN8jagQUiDvaq/diDEEXADlm21kioDQ==",
+  "dgSpecHash": "6CYZBBgPQUDdGtGzRKokDInZWHoVJbsUgpMUCXA1AnSXwiQnyoCCRwsB2SwiYKGWReZPW8j8G4yirUJi0CHa8g==",
   "success": true,
   "projectFilePath": "/Users/crowdforce/fastfood/FastFood/FastFood.csproj",
   "expectedPackageFiles": [
+    "/Users/crowdforce/.nuget/packages/erroror/1.2.1/erroror.1.2.1.nupkg.sha512",
     "/Users/crowdforce/.nuget/packages/microsoft.aspnetcore.openapi/7.0.3/microsoft.aspnetcore.openapi.7.0.3.nupkg.sha512",
     "/Users/crowdforce/.nuget/packages/microsoft.extensions.apidescription.server/6.0.5/microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
     "/Users/crowdforce/.nuget/packages/microsoft.openapi/1.4.3/microsoft.openapi.1.4.3.nupkg.sha512",

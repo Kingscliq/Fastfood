@@ -1,4 +1,5 @@
 
+using ErrorOr;
 using FastFood.Models;
 namespace FastFood.Services.FastFood
 {
@@ -6,7 +7,7 @@ namespace FastFood.Services.FastFood
     {
         void CreateFastFood(FastFoodModel fastfood);
         void DeleteFastFood(Guid id);
-        FastFoodModel GetFastFood(Guid id);
+        ErrorOr<FastFoodModel> GetFastFood(Guid id);
         void UpsertFastFood(FastFoodModel fastfood);
     }
 }
