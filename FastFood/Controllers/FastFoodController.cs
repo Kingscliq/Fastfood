@@ -31,7 +31,15 @@ namespace FastFood.Controllers
 
             _fastfoodService.CreateFastFood(fastfood);
 
-            var response = new FastFoodResponse(fastfood.Id, fastfood.Name, fastfood.Description, fastfood.StartDate, fastfood.EndDate, fastfood.LastModifiedDateTime, fastfood.Savory, fastfood.Sweet);
+            var response = new FastFoodResponse(fastfood.Id,
+             fastfood.Name,
+             fastfood.Description,
+             fastfood.StartDate,
+             fastfood.EndDate,
+             fastfood.LastModifiedDateTime,
+             fastfood.Savory,
+             fastfood.Sweet);
+
             return CreatedAtAction(
                 actionName: nameof(GetFastFood),
                 routeValues: new { id = response.Id },
@@ -59,26 +67,27 @@ namespace FastFood.Controllers
         [HttpPut("{id:guid}")]
         public IActionResult UpsertFastFood(Guid Id, UpsertFastFoodResquest request)
         {
-          var fastfood = new FastFoodModel(
-            Id,
-            request.Name,
-            request.Description,
-            request.EndDate,
-            request.StartDate,
-            DateTime.UtcNow,
-            request.Savory,
-            request.Sweet
-          );
+            var fastfood = new FastFoodModel(
+              Id,
+              request.Name,
+              request.Description,
+              request.EndDate,
+              request.StartDate,
+              DateTime.UtcNow,
+              request.Savory,
+              request.Sweet
+            );
 
-        _fastfoodService.UpsertFastFood(fastfood);
+            _fastfoodService.UpsertFastFood(fastfood);
 
-        // TODO: Return 201 Created if the Item's ID doesnt exist on the DB 
+            // TODO: Return 201 Created if the Item's ID doesnt exist on the DB 
             return NoContent();
         }
 
         [HttpDelete("{id:guid}")]
         public IActionResult DeleteFastFood(Guid Id)
         {
+            _fastfoodService.DeleteFastFood(Id);
             return Ok(Id);
         }
     }

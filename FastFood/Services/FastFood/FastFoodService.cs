@@ -10,6 +10,11 @@ public class FastFoodService : IFastFoodService
         _fastfood.Add(fastfood.Id, fastfood);
     }
 
+    public void DeleteFastFood(Guid id)
+    {
+        _fastfood.Remove(id);
+    }
+
     public FastFoodModel GetFastFood(Guid id)
     {
         return _fastfood[id];
@@ -17,6 +22,6 @@ public class FastFoodService : IFastFoodService
 
     public void UpsertFastFood(FastFoodModel fastfood)
     {
-       _fastfood.Add(fastfood.Id, fastfood);
+       _fastfood[fastfood.Id] = fastfood;
     }
 }
