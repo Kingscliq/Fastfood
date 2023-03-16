@@ -5,9 +5,9 @@ namespace FastFood.Services.FastFood
 {
     public interface IFastFoodService
     {
-        void CreateFastFood(FastFoodModel fastfood);
-        void DeleteFastFood(Guid id);
+        ErrorOr<Created> CreateFastFood(FastFoodModel fastfood);
+        ErrorOr<Deleted> DeleteFastFood(Guid id);
         ErrorOr<FastFoodModel> GetFastFood(Guid id);
-        void UpsertFastFood(FastFoodModel fastfood);
+        ErrorOr<Updated> UpsertFastFood(FastFoodModel fastfood);
     }
 }

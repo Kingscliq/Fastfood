@@ -7,14 +7,18 @@ namespace FastFood.Services.FastFood;
 public class FastFoodService : IFastFoodService
 {
     private static readonly Dictionary<Guid, FastFoodModel> _fastfood = new();
-    public void CreateFastFood(FastFoodModel fastfood)
+    public ErrorOr<Created> CreateFastFood(FastFoodModel fastfood)
     {
         _fastfood.Add(fastfood.Id, fastfood);
+
+        return Result.Created;
     }
 
-    public void DeleteFastFood(Guid id)
+    public ErrorOr<Deleted> DeleteFastFood(Guid id)
     {
         _fastfood.Remove(id);
+
+        return Result.Deleted;
     }
 
     public ErrorOr<FastFoodModel> GetFastFood(Guid id)
@@ -25,8 +29,10 @@ public class FastFoodService : IFastFoodService
         return Errors.FastFood.NotFound;
     }
 
-    public void UpsertFastFood(FastFoodModel fastfood)
+    public ErrorOr<Updated> UpsertFastFood(FastFoodModel fastfood)
     {
        _fastfood[fastfood.Id] = fastfood;
+
+       return Result.Updated;
     }
 }

@@ -53,17 +53,23 @@ namespace FastFood.Controllers
 
             return getFastFoodResult.Match(
                 fastfood => Ok(MapFastFoodResponse(fastfood)),
-                error => Problem());
-            // return 
-            // if (getFastFoodResult.IsError && getFastFoodResult.FirstError == Errors.FastFood.NotFound)
-            // {
-            //     return NotFound();
-            // }
+                errors => Problem(errors));
+            /* 
+            
+            // /////////////////////////////
+                return 
+                // if (getFastFoodResult.IsError && getFastFoodResult.FirstError == Errors.FastFood.NotFound)
+                // {
+                //     return NotFound();
+                // }
 
-            // var fastfood = getFastFoodResult.Value;
-            // FastFoodResponse response = MapFastFoodResponse(fastfood);
+                // var fastfood = getFastFoodResult.Value;
+                // FastFoodResponse response = MapFastFoodResponse(fastfood);
 
-            // return Ok(response);
+                // return Ok(response);
+            // /////////////////////////////
+            
+            */
         }
 
         private static FastFoodResponse MapFastFoodResponse(FastFoodModel fastfood)
