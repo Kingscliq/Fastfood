@@ -33,3 +33,4 @@
 /Users/crowdforce/fastfood/FastFood/obj/Debug/net7.0/FastFood.pdb
 /Users/crowdforce/fastfood/FastFood/obj/Debug/net7.0/FastFood.genruntimeconfig.cache
 /Users/crowdforce/fastfood/FastFood/obj/Debug/net7.0/ref/FastFood.dll
+/Users/crowdforce/fastfood/FastFood/bin/Debug/net7.0/ErrorOr.dll

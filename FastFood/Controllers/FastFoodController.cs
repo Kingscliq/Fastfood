@@ -2,12 +2,12 @@ using Microsoft.AspNetCore.Mvc;
 using FastFood.Contracts.FastFood;
 using FastFood.Models;
 using FastFood.Services.FastFood;
+using ErrorOr;
+using FastFood.ServiceErrors;
 
 namespace FastFood.Controllers
 {
-    [ApiController]
-    [Route("/fastfood")]
-    public class FastFoodController : ControllerBase
+    public class FastFoodController : ApiController
     {
         private readonly IFastFoodService _fastfoodService;
 
@@ -49,19 +49,34 @@ namespace FastFood.Controllers
         [HttpGet("{id:guid}")]
         public IActionResult GetFastFood(Guid Id)
         {
-            var fastfood = _fastfoodService.GetFastFood(Id);
+            ErrorOr<FastFoodModel> getFastFoodResult = _fastfoodService.GetFastFood(Id);
 
-            var response = new FastFoodResponse(
-                fastfood.Id,
-                fastfood.Name,
-                fastfood.Description,
-                fastfood.StartDate,
-                fastfood.EndDate,
-                fastfood.LastModifiedDateTime,
-                fastfood.Savory,
-                fastfood.Sweet);
+            return getFastFoodResult.Match(
+                fastfood => Ok(MapFastFoodResponse(fastfood)),
+                error => Problem());
+            // return 
+            // if (getFastFoodResult.IsError && getFastFoodResult.FirstError == Errors.FastFood.NotFound)
+            // {
+            //     return NotFound();
+            // }
 
-            return Ok(response);
+            // var fastfood = getFastFoodResult.Value;
+            // FastFoodResponse response = MapFastFoodResponse(fastfood);
+
+            // return Ok(response);
+        }
+
+        private static FastFoodResponse MapFastFoodResponse(FastFoodModel fastfood)
+        {
+            return new FastFoodResponse(
+                            fastfood.Id,
+                            fastfood.Name,
+                            fastfood.Description,
+                            fastfood.StartDate,
+                            fastfood.EndDate,
+                            fastfood.LastModifiedDateTime,
+                            fastfood.Savory,
+                            fastfood.Sweet);
         }
 
         [HttpPut("{id:guid}")]
