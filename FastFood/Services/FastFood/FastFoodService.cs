@@ -29,11 +29,12 @@ public class FastFoodService : IFastFoodService
         return Errors.FastFood.NotFound;
     }
 
-    public ErrorOr<Updated> UpsertFastFood(FastFoodModel fastfood)
+    public ErrorOr<UpsertedFastFood> UpsertFastFood(FastFoodModel fastfood)
     {
         var IsNewlyCreated = !_fastfood.ContainsKey(fastfood.Id);
+
        _fastfood[fastfood.Id] = fastfood;
 
-       return Result.Updated;
+       return new UpsertedFastFood(IsNewlyCreated);
     }
 }

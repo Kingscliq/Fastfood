@@ -31,16 +31,18 @@ namespace FastFood.Controllers
 
             ErrorOr<Created> createFastFoodResult = _fastfoodService.CreateFastFood(fastfood);
 
-            if (createFastFoodResult.IsError)
-            {
-                return Problem(createFastFoodResult.Errors);
-            }
+            return createFastFoodResult.Match(
+                _ => CreatedAtUpdatedFastFood(fastfood),
+                errors => Problem(errors));
+            // if (createFastFoodResult.IsError)
+            // {
+            //     return Problem(createFastFoodResult.Errors);
+            // }
 
-            return CreatedAtAction(
-                actionName: nameof(GetFastFood),
-                routeValues: new { id = fastfood.Id },
-                value: MapFastFoodResponse(fastfood));
+            // return CreatedAtUpdatedFastFood(fastfood);
         }
+
+
 
         [HttpGet("{id:guid}")]
         public IActionResult GetFastFood(Guid Id)
@@ -82,11 +84,13 @@ namespace FastFood.Controllers
               request.Sweet
             );
 
-           ErrorOr<Updated> updateFastFoodResult =  _fastfoodService.UpsertFastFood(fastfood);
+            ErrorOr<UpsertedFastFood> updateFastFoodResult = _fastfoodService.UpsertFastFood(fastfood);
 
-            // return updateFastFoodResponse.Match()
+            return updateFastFoodResult.Match(
+             updated => updated.IsNewlyCreated ? CreatedAtUpdatedFastFood(fastfood) : NoContent(),
+             errors => Problem(errors)
+            );
             // TODO: Return 201 Created if the Item's ID doesnt exist on the DB 
-            return NoContent();
         }
 
         [HttpDelete("{id:guid}")]
@@ -95,10 +99,9 @@ namespace FastFood.Controllers
             ErrorOr<Deleted> deletedResult = _fastfoodService.DeleteFastFood(Id);
 
             return deletedResult.Match(
-                 deleted => NoContent(),
+                 _ => NoContent(),
                  errors => Problem(errors)
              );
-
         }
 
         // Abstracting fast Food Response
@@ -114,11 +117,13 @@ namespace FastFood.Controllers
                             fastfood.Savory,
                             fastfood.Sweet);
         }
+
+        private IActionResult CreatedAtUpdatedFastFood(FastFoodModel fastfood)
+        {
+            return CreatedAtAction(
+                actionName: nameof(GetFastFood),
+                routeValues: new { id = fastfood.Id },
+                value: MapFastFoodResponse(fastfood));
+        }
     }
-
-
-
-
 }
-
-
