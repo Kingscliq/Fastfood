@@ -29,21 +29,17 @@ namespace FastFood.Controllers
                 request.Savory,
                 request.Sweet);
 
-            _fastfoodService.CreateFastFood(fastfood);
+            ErrorOr<Created> createFastFoodResult = _fastfoodService.CreateFastFood(fastfood);
 
-            var response = new FastFoodResponse(fastfood.Id,
-             fastfood.Name,
-             fastfood.Description,
-             fastfood.StartDate,
-             fastfood.EndDate,
-             fastfood.LastModifiedDateTime,
-             fastfood.Savory,
-             fastfood.Sweet);
+            if (createFastFoodResult.IsError)
+            {
+                return Problem(createFastFoodResult.Errors);
+            }
 
             return CreatedAtAction(
                 actionName: nameof(GetFastFood),
-                routeValues: new { id = response.Id },
-                value: response);
+                routeValues: new { id = fastfood.Id },
+                value: MapFastFoodResponse(fastfood));
         }
 
         [HttpGet("{id:guid}")]
@@ -68,21 +64,8 @@ namespace FastFood.Controllers
 
                 // return Ok(response);
             // /////////////////////////////
-            
-            */
-        }
 
-        private static FastFoodResponse MapFastFoodResponse(FastFoodModel fastfood)
-        {
-            return new FastFoodResponse(
-                            fastfood.Id,
-                            fastfood.Name,
-                            fastfood.Description,
-                            fastfood.StartDate,
-                            fastfood.EndDate,
-                            fastfood.LastModifiedDateTime,
-                            fastfood.Savory,
-                            fastfood.Sweet);
+            */
         }
 
         [HttpPut("{id:guid}")]
@@ -99,8 +82,9 @@ namespace FastFood.Controllers
               request.Sweet
             );
 
-            _fastfoodService.UpsertFastFood(fastfood);
+           ErrorOr<Updated> updateFastFoodResult =  _fastfoodService.UpsertFastFood(fastfood);
 
+            // return updateFastFoodResponse.Match()
             // TODO: Return 201 Created if the Item's ID doesnt exist on the DB 
             return NoContent();
         }
@@ -108,8 +92,33 @@ namespace FastFood.Controllers
         [HttpDelete("{id:guid}")]
         public IActionResult DeleteFastFood(Guid Id)
         {
-            _fastfoodService.DeleteFastFood(Id);
-            return Ok(Id);
+            ErrorOr<Deleted> deletedResult = _fastfoodService.DeleteFastFood(Id);
+
+            return deletedResult.Match(
+                 deleted => NoContent(),
+                 errors => Problem(errors)
+             );
+
+        }
+
+        // Abstracting fast Food Response
+        private static FastFoodResponse MapFastFoodResponse(FastFoodModel fastfood)
+        {
+            return new FastFoodResponse(
+                            fastfood.Id,
+                            fastfood.Name,
+                            fastfood.Description,
+                            fastfood.StartDate,
+                            fastfood.EndDate,
+                            fastfood.LastModifiedDateTime,
+                            fastfood.Savory,
+                            fastfood.Sweet);
         }
     }
+
+
+
+
 }
+
+

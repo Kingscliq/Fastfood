@@ -31,6 +31,7 @@ public class FastFoodService : IFastFoodService
 
     public ErrorOr<Updated> UpsertFastFood(FastFoodModel fastfood)
     {
+        var IsNewlyCreated = !_fastfood.ContainsKey(fastfood.Id);
        _fastfood[fastfood.Id] = fastfood;
 
        return Result.Updated;
