@@ -2,7 +2,6 @@ using ErrorOr;
 using FastFood.Models;
 namespace FastFood.ServiceErrors;
 
-
 public static class Errors{
     public static  class FastFood{
          public static Error InvalidName => Error.NotFound(

@@ -1,4 +1,5 @@
 using ErrorOr;
+using FastFood.ServiceErrors;
 
 namespace FastFood.Models;
 
@@ -49,12 +50,12 @@ public class FastFoodModel
     {
         if (Name.Length is < MinNameLength or > MaxNameLength)
         {
-
+            return Errors.FastFood.InvalidName;
         }
 
-        if (Name.Length is < MinNameLength or > MaxNameLength)
+        if (Description.Length is < MinDescriptionLength or > MaxDescriptionLength)
         {
-         
+         return Errors.FastFood.InvalidDescription;
         }
 
         return new FastFoodModel(Guid.NewGuid(), Name, Description, StartDate, EndDate, DateTime.UtcNow, Savory, Sweet);
