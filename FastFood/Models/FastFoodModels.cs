@@ -48,15 +48,16 @@ public class FastFoodModel
        List<string> Savory,
        List<string> Sweet)
     {
+        List<Error> errors = new();
+
         if (Name.Length is < MinNameLength or > MaxNameLength)
-        {
-            return Errors.FastFood.InvalidName;
-        }
+            errors.Add(Errors.FastFood.InvalidName);
 
         if (Description.Length is < MinDescriptionLength or > MaxDescriptionLength)
-        {
-         return Errors.FastFood.InvalidDescription;
-        }
+            errors.Add(Errors.FastFood.InvalidDescription);
+
+        if (errors.Count > 0)
+            return errors;
 
         return new FastFoodModel(Guid.NewGuid(), Name, Description, StartDate, EndDate, DateTime.UtcNow, Savory, Sweet);
     }
