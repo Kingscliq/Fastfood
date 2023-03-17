@@ -10,15 +10,13 @@ namespace FastFood.Controllers
     {
         protected IActionResult Problem(List<Error> errors)
         {
-
             if (errors.Any(e => e.Type == ErrorType.Validation))
             {
                 var modelStateDictionary = new ModelStateDictionary();
-
-                foreach (var error in errors)
-                {
-                    modelStateDictionary.AddModelError(error.Code, error.Description);
-                }
+                    foreach (var error in errors)
+                    {
+                        modelStateDictionary.AddModelError(error.Code, error.Description);
+                    }
                 return ValidationProblem(modelStateDictionary);
             }
 

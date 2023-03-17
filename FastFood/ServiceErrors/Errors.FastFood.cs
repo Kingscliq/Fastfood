@@ -4,13 +4,13 @@ namespace FastFood.ServiceErrors;
 
 public static class Errors{
     public static  class FastFood{
-         public static Error InvalidName => Error.NotFound(
+         public static Error InvalidName => Error.Validation(
             code: "FastFood.InvalidName",
-            description: $"Name must be at least {FastFoodModel.MinNameLength} and at most {FastFoodModel.MinNameLength}"
+            description: $"Name must be at least {FastFoodModel.MinNameLength} and at most {FastFoodModel.MaxNameLength}"
         );
-        public static Error InvalidDescription => Error.NotFound(
+        public static Error InvalidDescription => Error.Validation(
             code: "FastFood.InvalidDescription",
-            description: $"Description must be at least {FastFoodModel.MinDescriptionLength} and at most {FastFoodModel.MinDescriptionLength}"
+            description: $"Description must be at least {FastFoodModel.MinDescriptionLength} and at most {FastFoodModel.MaxDescriptionLength}"
         );
         public static Error NotFound => Error.NotFound(
             code: "FastFood.NotFound",
