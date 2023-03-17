@@ -8,7 +8,6 @@ namespace FastFood.Controllers
     public class ApiController : ControllerBase
     {
         protected IActionResult Problem(List<Error> errors){
-
             var firstError = errors[0];
 
             var statusCode = firstError.Type switch
