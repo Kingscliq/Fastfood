@@ -19,30 +19,25 @@ namespace FastFood.Controllers
         [HttpPost]
         public IActionResult CreateFastFood(CreateFastFoodRequest request)
         {
-            var fastfood = new FastFoodModel(
-                Guid.NewGuid(),
-                request.Name,
-                request.Description,
-                request.StartDate,
-                request.EndDate,
-                DateTime.UtcNow,
-                request.Savory,
-                request.Sweet);
+            ErrorOr<FastFoodModel> requestForFastFood = FastFoodModel.Create(
+                   request.Name,
+                   request.Description,
+                   request.StartDate,
+                   request.EndDate,
+                   request.Savory,
+                   request.Sweet);
+
+            if (requestForFastFood.IsError)
+                return Problem(requestForFastFood.Errors);
+
+            var fastfood = requestForFastFood.Value;
 
             ErrorOr<Created> createFastFoodResult = _fastfoodService.CreateFastFood(fastfood);
 
             return createFastFoodResult.Match(
                 _ => CreatedAtUpdatedFastFood(fastfood),
                 errors => Problem(errors));
-            // if (createFastFoodResult.IsError)
-            // {
-            //     return Problem(createFastFoodResult.Errors);
-            // }
-
-            // return CreatedAtUpdatedFastFood(fastfood);
         }
-
-
 
         [HttpGet("{id:guid}")]
         public IActionResult GetFastFood(Guid Id)

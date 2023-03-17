@@ -40,7 +40,7 @@ public class FastFoodModel
         this.Sweet = Sweet;
     }
 
-    public ErrorOr<FastFoodModel> Create(
+    public static ErrorOr<FastFoodModel> Create(
        string Name,
        string Description,
        DateTime StartDate,
