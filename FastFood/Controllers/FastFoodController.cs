@@ -68,17 +68,20 @@ namespace FastFood.Controllers
         [HttpPut("{id:guid}")]
         public IActionResult UpsertFastFood(Guid Id, UpsertFastFoodResquest request)
         {
-            var fastfood = new FastFoodModel(
-              Id,
+            var requestToUpdate = FastFoodModel.Create(
               request.Name,
               request.Description,
               request.EndDate,
               request.StartDate,
-              DateTime.UtcNow,
               request.Savory,
-              request.Sweet
+              request.Sweet,
+              Id
             );
 
+        if(requestToUpdate.IsError)
+        return Problem(requestToUpdate.Errors);
+
+        var fastfood = requestToUpdate.Value;
             ErrorOr<UpsertedFastFood> updateFastFoodResult = _fastfoodService.UpsertFastFood(fastfood);
 
             return updateFastFoodResult.Match(

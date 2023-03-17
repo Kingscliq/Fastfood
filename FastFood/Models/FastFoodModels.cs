@@ -40,13 +40,15 @@ public class FastFoodModel
         this.Sweet = Sweet;
     }
 
-    public static ErrorOr<FastFoodModel> Create(
+    public static ErrorOr<FastFoodModel> From(
        string Name,
        string Description,
        DateTime StartDate,
        DateTime EndDate,
        List<string> Savory,
-       List<string> Sweet)
+       List<string> Sweet,
+       Guid? Id = null
+       )
     {
         List<Error> errors = new();
 
@@ -59,6 +61,32 @@ public class FastFoodModel
         if (errors.Count > 0)
             return errors;
 
-        return new FastFoodModel(Guid.NewGuid(), Name, Description, StartDate, EndDate, DateTime.UtcNow, Savory, Sweet);
+        return new FastFoodModel(Id ?? Guid.NewGuid(), Name, Description, StartDate, EndDate, DateTime.UtcNow, Savory, Sweet);
+    }
+
+
+
+    public static ErrorOr<FastFoodModel> Create(
+       string Name,
+       string Description,
+       DateTime StartDate,
+       DateTime EndDate,
+       List<string> Savory,
+       List<string> Sweet,
+       Guid? Id = null
+       )
+    {
+        List<Error> errors = new();
+
+        if (Name.Length is < MinNameLength or > MaxNameLength)
+            errors.Add(Errors.FastFood.InvalidName);
+
+        if (Description.Length is < MinDescriptionLength or > MaxDescriptionLength)
+            errors.Add(Errors.FastFood.InvalidDescription);
+
+        if (errors.Count > 0)
+            return errors;
+
+        return new FastFoodModel(Id ?? Guid.NewGuid(), Name, Description, StartDate, EndDate, DateTime.UtcNow, Savory, Sweet);
     }
 }
