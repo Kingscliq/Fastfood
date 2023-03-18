@@ -1,10 +1,10 @@
-@id=19ff3d87-6e21-4ce6-9c40-b86871beb585
+@id=f9b96de6-eef0-4097-be75-2e3428321bb4
 
 PUT http://localhost:5082/fastfood/{{id}}
 Content-Type: application/json
 
 {
-  "name": "Salus Vutos Tyrss",
+  "name": "S",
   "description": "Vegan everything! Join us for a healthy breakfast..",
   "startDateTime": "2022-04-08T08:00:00",
   "endDateTime": "2022-04-08T11:00:00",

@@ -19,13 +19,7 @@ namespace FastFood.Controllers
         [HttpPost]
         public IActionResult CreateFastFood(CreateFastFoodRequest request)
         {
-            ErrorOr<FastFoodModel> requestForFastFood = FastFoodModel.Create(
-                   request.Name,
-                   request.Description,
-                   request.StartDate,
-                   request.EndDate,
-                   request.Savory,
-                   request.Sweet);
+            ErrorOr<FastFoodModel> requestForFastFood = FastFoodModel.From(request);
 
             if (requestForFastFood.IsError)
                 return Problem(requestForFastFood.Errors);
@@ -68,16 +62,7 @@ namespace FastFood.Controllers
         [HttpPut("{id:guid}")]
         public IActionResult UpsertFastFood(Guid Id, UpsertFastFoodResquest request)
         {
-            var requestToUpdate = FastFoodModel.Create(
-              request.Name,
-              request.Description,
-              request.EndDate,
-              request.StartDate,
-              request.Savory,
-              request.Sweet,
-              Id
-            );
-
+            var requestToUpdate = FastFoodModel.From(Id, request);
         if(requestToUpdate.IsError)
         return Problem(requestToUpdate.Errors);
 
@@ -88,7 +73,6 @@ namespace FastFood.Controllers
              updated => updated.IsNewlyCreated ? CreatedAtUpdatedFastFood(fastfood) : NoContent(),
              errors => Problem(errors)
             );
-            // TODO: Return 201 Created if the Item's ID doesnt exist on the DB 
         }
 
         [HttpDelete("{id:guid}")]
@@ -106,14 +90,14 @@ namespace FastFood.Controllers
         private static FastFoodResponse MapFastFoodResponse(FastFoodModel fastfood)
         {
             return new FastFoodResponse(
-                            fastfood.Id,
-                            fastfood.Name,
-                            fastfood.Description,
-                            fastfood.StartDate,
-                            fastfood.EndDate,
-                            fastfood.LastModifiedDateTime,
-                            fastfood.Savory,
-                            fastfood.Sweet);
+                fastfood.Id,
+                fastfood.Name,
+                fastfood.Description,
+                fastfood.StartDate,
+                fastfood.EndDate,
+                fastfood.LastModifiedDateTime,
+                fastfood.Savory,
+                fastfood.Sweet);
         }
 
         private IActionResult CreatedAtUpdatedFastFood(FastFoodModel fastfood)

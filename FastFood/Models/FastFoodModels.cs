@@ -1,4 +1,5 @@
 using ErrorOr;
+using FastFood.Contracts.FastFood;
 using FastFood.ServiceErrors;
 
 namespace FastFood.Models;
@@ -7,7 +8,7 @@ public class FastFoodModel
 {
 
     public const int MinNameLength = 3;
-    public const int MaxNameLength = 13;
+    public const int MaxNameLength = 25;
     public const int MinDescriptionLength = 15;
     public const int MaxDescriptionLength = 120;
 
@@ -40,7 +41,7 @@ public class FastFoodModel
         this.Sweet = Sweet;
     }
 
-    public static ErrorOr<FastFoodModel> From(
+    public static ErrorOr<FastFoodModel> Create(
        string Name,
        string Description,
        DateTime StartDate,
@@ -64,29 +65,28 @@ public class FastFoodModel
         return new FastFoodModel(Id ?? Guid.NewGuid(), Name, Description, StartDate, EndDate, DateTime.UtcNow, Savory, Sweet);
     }
 
-
-
-    public static ErrorOr<FastFoodModel> Create(
-       string Name,
-       string Description,
-       DateTime StartDate,
-       DateTime EndDate,
-       List<string> Savory,
-       List<string> Sweet,
-       Guid? Id = null
-       )
+    internal static ErrorOr<FastFoodModel> From(CreateFastFoodRequest request)
     {
-        List<Error> errors = new();
+        return Create(
+            request.Name,
+            request.Description,
+            request.StartDate,
+            request.EndDate,
+            request.Savory,
+            request.Sweet
+        );
+    }
 
-        if (Name.Length is < MinNameLength or > MaxNameLength)
-            errors.Add(Errors.FastFood.InvalidName);
-
-        if (Description.Length is < MinDescriptionLength or > MaxDescriptionLength)
-            errors.Add(Errors.FastFood.InvalidDescription);
-
-        if (errors.Count > 0)
-            return errors;
-
-        return new FastFoodModel(Id ?? Guid.NewGuid(), Name, Description, StartDate, EndDate, DateTime.UtcNow, Savory, Sweet);
+    internal static ErrorOr<FastFoodModel> From(Guid? Id, UpsertFastFoodResquest request)
+    {
+        return Create(
+              request.Name,
+              request.Description,
+              request.EndDate,
+              request.StartDate,
+              request.Savory,
+              request.Sweet,
+              Id
+        );
     }
 }
