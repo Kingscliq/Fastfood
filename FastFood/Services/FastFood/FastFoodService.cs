@@ -17,7 +17,8 @@ public class FastFoodService : IFastFoodService
     }
     public ErrorOr<Created> CreateFastFood(FastFoodModel fastfood)
     {
-        _fastfood.Add(fastfood.Id, fastfood);
+        _dbContext.Add(fastfood);
+        _dbContext.SaveChanges();
 
         return Result.Created;
     }
