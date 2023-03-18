@@ -1,12 +1,20 @@
 using ErrorOr;
 using FastFood.Models;
+using FastFood.Persistence;
 using FastFood.ServiceErrors;
 
 namespace FastFood.Services.FastFood;
 
 public class FastFoodService : IFastFoodService
 {
-    private static readonly Dictionary<Guid, FastFoodModel> _fastfood = new();
+    // private static readonly Dictionary<Guid, FastFoodModel> _fastfood = new();
+
+    private readonly FastFoodDbContext _dbContext;
+
+    public FastFoodService(FastFoodDbContext dbContext)
+    {
+        this._dbContext = dbContext;
+    }
     public ErrorOr<Created> CreateFastFood(FastFoodModel fastfood)
     {
         _fastfood.Add(fastfood.Id, fastfood);
@@ -23,8 +31,9 @@ public class FastFoodService : IFastFoodService
 
     public ErrorOr<FastFoodModel> GetFastFood(Guid id)
     {
-        if(_fastfood.TryGetValue(id, out var fastFood)){
-             return fastFood;
+        if (_fastfood.TryGetValue(id, out var fastFood))
+        {
+            return fastFood;
         }
         return Errors.FastFood.NotFound;
     }
@@ -33,8 +42,8 @@ public class FastFoodService : IFastFoodService
     {
         var IsNewlyCreated = !_fastfood.ContainsKey(fastfood.Id);
 
-       _fastfood[fastfood.Id] = fastfood;
+        _fastfood[fastfood.Id] = fastfood;
 
-       return new UpsertedFastFood(IsNewlyCreated);
+        return new UpsertedFastFood(IsNewlyCreated);
     }
 }
