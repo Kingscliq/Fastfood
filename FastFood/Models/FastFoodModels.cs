@@ -12,14 +12,14 @@ public class FastFoodModel
     public const int MinDescriptionLength = 15;
     public const int MaxDescriptionLength = 120;
 
-    public Guid Id { get; }
-    public string Name { get; }
-    public string Description { get; }
-    public DateTime StartDate { get; }
-    public DateTime EndDate { get; }
-    public DateTime LastModifiedDateTime { get; }
-    public List<string> Savory { get; }
-    public List<string> Sweet { get; }
+    public Guid Id { get; private set; }
+    public string Name { get; private set; }
+    public string Description { get; private set; }
+    public DateTime StartDate { get; private set; }
+    public DateTime EndDate { get; private set; }
+    public DateTime LastModifiedDateTime { get; private set; }
+    public List<string> Savory { get; private set; }
+    public List<string> Sweet { get; private set; }
 
     private FastFoodModel(
        Guid Id,
