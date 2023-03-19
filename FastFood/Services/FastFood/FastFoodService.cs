@@ -8,7 +8,6 @@ namespace FastFood.Services.FastFood;
 public class FastFoodService : IFastFoodService
 {
     // private static readonly Dictionary<Guid, FastFoodModel> _fastfood = new();
-
     private readonly FastFoodDbContext _dbContext;
 
     public FastFoodService(FastFoodDbContext dbContext)
@@ -19,22 +18,29 @@ public class FastFoodService : IFastFoodService
     {
         _dbContext.Add(fastfood);
         _dbContext.SaveChanges();
-
         return Result.Created;
     }
 
     public ErrorOr<Deleted> DeleteFastFood(Guid id)
     {
-        _fastfood.Remove(id);
+        var breakfast = _dbContext.FastFoods.Find(id);
+
+        if(breakfast is null){
+            return Errors.FastFood.NotFound;
+        }
+
+        _dbContext.Remove(breakfast);
+        _dbContext.SaveChanges();
 
         return Result.Deleted;
     }
 
     public ErrorOr<FastFoodModel> GetFastFood(Guid id)
     {
-        if (_fastfood.TryGetValue(id, out var fastFood))
-        {
-            return fastFood;
+        var fastFood = _dbContext.FastFoods.Find(id);
+
+        if(fastFood != null && fastFood is FastFoodModel fastFoodModel){
+            return fastFoodModel;
         }
         return Errors.FastFood.NotFound;
     }
