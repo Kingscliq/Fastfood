@@ -47,10 +47,14 @@ public class FastFoodService : IFastFoodService
 
     public ErrorOr<UpsertedFastFood> UpsertFastFood(FastFoodModel fastfood)
     {
-        var IsNewlyCreated = !_fastfood.ContainsKey(fastfood.Id);
+        var IsNewlyCreated = _dbContext.FastFoods.Find(fastfood.Id) == null;
 
-        _fastfood[fastfood.Id] = fastfood;
-
+        if(IsNewlyCreated){
+            _dbContext.Add(fastfood);
+        }else{
+            _dbContext.Update(fastfood);
+        }
+        _dbContext.SaveChanges();
         return new UpsertedFastFood(IsNewlyCreated);
     }
 }
