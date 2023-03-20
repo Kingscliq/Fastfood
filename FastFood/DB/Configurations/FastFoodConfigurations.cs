@@ -6,6 +6,7 @@ namespace FastFood.DB.Configurations;
 
 public class FastFoodConfigurations : IEntityTypeConfiguration<FastFoodModel>{
 public void Configure(EntityTypeBuilder<FastFoodModel> builder ) {
+    builder.HasKey(b => b.Id);
     builder.Property(b => b.Name).HasMaxLength(FastFoodModel.MaxNameLength);
     builder.Property(b => b.Description).HasMaxLength(FastFoodModel.MaxDescriptionLength);
 

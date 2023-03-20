@@ -1,6 +1,6 @@
 using ErrorOr;
 using FastFood.Models;
-using FastFood.Persistence;
+using FastFood.DB;
 using FastFood.ServiceErrors;
 
 namespace FastFood.Services.FastFood;

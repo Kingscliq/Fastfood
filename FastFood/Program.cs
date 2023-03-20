@@ -1,4 +1,4 @@
-using FastFood.Persistence;
+using FastFood.DB;
 using FastFood.Services.FastFood;
 using Microsoft.EntityFrameworkCore;
 
