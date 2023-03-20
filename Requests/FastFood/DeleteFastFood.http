@@ -1,3 +1,3 @@
-@id=1bd977d3-6501-48b7-91e6-cbe94da7ab4f
+@id=b17b5f3b-7026-425b-ba01-aa9edb32f067
 
 DELETE http://localhost:5082/fastfood/{{id}}

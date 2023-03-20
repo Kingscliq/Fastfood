@@ -1,7 +1,7 @@
 {
   "format": 1,
   "restore": {
-    "/Users/crowdforce/fastfood/fastfood/FastFood.csproj": {}
+    "/Users/crowdforce/fastfood/FastFood/FastFood.csproj": {}
   },
   "projects": {
     "/Users/crowdforce/fastfood/FastFood.Contracts/FastFood.Contracts.csproj": {
@@ -57,14 +57,14 @@
         }
       }
     },
-    "/Users/crowdforce/fastfood/fastfood/FastFood.csproj": {
+    "/Users/crowdforce/fastfood/FastFood/FastFood.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/crowdforce/fastfood/fastfood/FastFood.csproj",
+        "projectUniqueName": "/Users/crowdforce/fastfood/FastFood/FastFood.csproj",
         "projectName": "FastFood",
-        "projectPath": "/Users/crowdforce/fastfood/fastfood/FastFood.csproj",
+        "projectPath": "/Users/crowdforce/fastfood/FastFood/FastFood.csproj",
         "packagesPath": "/Users/crowdforce/.nuget/packages/",
-        "outputPath": "/Users/crowdforce/fastfood/fastfood/obj/",
+        "outputPath": "/Users/crowdforce/fastfood/FastFood/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/crowdforce/.nuget/NuGet/NuGet.Config"
