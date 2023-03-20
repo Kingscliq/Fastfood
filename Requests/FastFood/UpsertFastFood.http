@@ -1,10 +1,10 @@
-@id=f9b96de6-eef0-4097-be75-2e3428321bb4
+@id=49a43ddc-d8a0-4aea-9342-3118406b0260
 
 PUT http://localhost:5082/fastfood/{{id}}
 Content-Type: application/json
 
 {
-  "name": "S",
+  "name": "Delicious Delicate",
   "description": "Vegan everything! Join us for a healthy breakfast..",
   "startDateTime": "2022-04-08T08:00:00",
   "endDateTime": "2022-04-08T11:00:00",

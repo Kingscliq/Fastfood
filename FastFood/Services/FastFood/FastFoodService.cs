@@ -47,7 +47,8 @@ public class FastFoodService : IFastFoodService
 
     public ErrorOr<UpsertedFastFood> UpsertFastFood(FastFoodModel fastfood)
     {
-        var IsNewlyCreated = _dbContext.FastFoods.Find(fastfood.Id) == null;
+        // var IsNewlyCreated = _dbContext.F÷astFoods.Find(fastfood.Id) == null;
+        var IsNewlyCreated = !_dbContext.FastFoods.Any(b => b.Id == fastfood.Id);
 
         if(IsNewlyCreated){
             _dbContext.Add(fastfood);
