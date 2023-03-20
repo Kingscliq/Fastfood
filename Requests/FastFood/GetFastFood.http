@@ -1,3 +1,3 @@
-@id=f9b96de6-eef0-4097-be75-2e3428321bb4
+@id=49a43ddc-d8a0-4aea-9342-3118406b0260
 
 GET http://localhost:5082/fastfood/{{id}}
