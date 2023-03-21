@@ -38,11 +38,7 @@ public class FastFoodService : IFastFoodService
     public ErrorOr<FastFoodModel> GetFastFood(Guid id)
     {
         var fastFood = _dbContext.FastFoods.Find(id);
-
-        if(fastFood != null && fastFood is FastFoodModel fastFoodModel){
-            return fastFoodModel;
-        }
-        return Errors.FastFood.NotFound;
+        return fastFood ?? (ErrorOr<FastFoodModel>)Errors.FastFood.NotFound;
     }
 
     public ErrorOr<UpsertedFastFood> UpsertFastFood(FastFoodModel fastfood)

@@ -41,22 +41,16 @@ namespace FastFood.Controllers
             return getFastFoodResult.Match(
                 fastfood => Ok(MapFastFoodResponse(fastfood)),
                 errors => Problem(errors));
-            /* 
-            
-            // /////////////////////////////
-                return 
-                // if (getFastFoodResult.IsError && getFastFoodResult.FirstError == Errors.FastFood.NotFound)
-                // {
-                //     return NotFound();
-                // }
+        }
 
-                // var fastfood = getFastFoodResult.Value;
-                // FastFoodResponse response = MapFastFoodResponse(fastfood);
+        [HttpGet("{id:guid}")]
+        public IActionResult GetAllFastFood()
+        {
+            ErrorOr<FastFoodModel> getAllFastFoodResult = _fastfoodService.GetFastFood(Id);
 
-                // return Ok(response);
-            // /////////////////////////////
-
-            */
+            return getAllFastFoodResult.Match(
+                fastfood => Ok(MapFastFoodResponse(fastfood)),
+                errors => Problem(errors));
         }
 
         [HttpPut("{id:guid}")]

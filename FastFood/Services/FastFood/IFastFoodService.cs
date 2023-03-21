@@ -8,6 +8,7 @@ namespace FastFood.Services.FastFood
         ErrorOr<Created> CreateFastFood(FastFoodModel fastfood);
         ErrorOr<Deleted> DeleteFastFood(Guid id);
         ErrorOr<FastFoodModel> GetFastFood(Guid id);
+        ErrorOr<List<FastFoodModel>> GetAllFastFood();
         ErrorOr<UpsertedFastFood> UpsertFastFood(FastFoodModel fastfood);
     }
 }
