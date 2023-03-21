@@ -35,6 +35,12 @@ public class FastFoodService : IFastFoodService
         return Result.Deleted;
     }
 
+    public ErrorOr<List<FastFoodModel>> GetAllFastFood()
+    {
+       var fastFoods = _dbContext.FastFoods.ToList();
+        return fastFoods ?? (ErrorOr<List<FastFoodModel>>)Errors.FastFood.NotFound;
+    }
+
     public ErrorOr<FastFoodModel> GetFastFood(Guid id)
     {
         var fastFood = _dbContext.FastFoods.Find(id);

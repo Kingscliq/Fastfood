@@ -43,13 +43,13 @@ namespace FastFood.Controllers
                 errors => Problem(errors));
         }
 
-        [HttpGet("{id:guid}")]
+        [HttpGet]
         public IActionResult GetAllFastFood()
         {
-            ErrorOr<FastFoodModel> getAllFastFoodResult = _fastfoodService.GetFastFood(Id);
+            ErrorOr<List<FastFoodModel>> getAllFastFoodResult = _fastfoodService.GetAllFastFood();
 
             return getAllFastFoodResult.Match(
-                fastfood => Ok(MapFastFoodResponse(fastfood)),
+                fastfood => Ok(fastfood),
                 errors => Problem(errors));
         }
 
