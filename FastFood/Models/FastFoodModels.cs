@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using ErrorOr;
 using FastFood.Contracts.FastFood;
 using FastFood.ServiceErrors;
